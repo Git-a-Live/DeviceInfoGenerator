@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.poi:poi:4.1.1'
+    compile 'org.apache.poi:poi-ooxml:4.1.1'
+}
+
+jar {
+    baseName = 'DIC'
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
